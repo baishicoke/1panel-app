@@ -1,0 +1,19 @@
+name: NeteaseCloudMusicApi
+tags:
+  - 实用工具
+title: 网易云音乐api
+description: 网易云音乐 Node.js API service
+additionalProperties:
+  key: neteasecloudmusicapi
+  name: NeteaseCloudMusicApi
+  tags:
+    - Tool
+  shortDescZh: 网易云音乐api
+  shortDescEn: Netease Cloud Music Api
+  type: tool
+  crossVersionUpdate: true
+  limit: 0
+  recommend: 0
+  website: https://gitlab.com/Binaryify/neteasecloudmusicapi
+  github: https://gitlab.com/Binaryify/neteasecloudmusicapi
+  document: https://gitlab.com/Binaryify/neteasecloudmusicapi

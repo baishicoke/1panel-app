@@ -1,0 +1,31 @@
+additionalProperties:
+  formFields:
+    - default: "3000"
+      edit: true
+      envKey: PANEL_APP_PORT_HTTP
+      labelEn: Port
+      labelZh: 端口
+      required: true
+      rule: paramPort
+      type: number
+    - default: "022"
+      edit: true
+      envKey: UMASK
+      labelEn: UMASK
+      labelZh: 文件权限掩码
+      required: true
+      type: text
+    - default: "1000"
+      edit: true
+      envKey: PUID
+      labelEn: User ID
+      labelZh: 用户 ID
+      required: true
+      type: number
+    - default: "1000"
+      edit: true
+      envKey: PGID
+      labelEn: Group ID
+      labelZh: 用户组 ID
+      required: true
+      type: number
