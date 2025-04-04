@@ -1,0 +1,78 @@
+additionalProperties:
+  formFields:
+    - default: 127.0.0.1
+      edit: true
+      envKey: LOCAL_ADDRESS
+      labelEn: Local Address
+      labelZh: 本地IP
+      required: true
+      type: text
+    - default: 12345
+      edit: true
+      envKey: LOCAL_PORT
+      labelEn: Local Port
+      labelZh: 本地端口
+      required: true
+      type: number
+      rule: paramPort
+    - default: 127.0.0.1
+      edit: true
+      envKey: SERVER_ADDRESS
+      labelEn: Server Address
+      labelZh: 服务端IP
+      required: true
+      type: text
+    - default: 2200
+      edit: true
+      envKey: SERVER_PORT
+      labelEn: Server Port
+      labelZh: 服务端端口
+      required: true
+      type: number
+      rule: paramPort
+    - default: tcp
+      edit: true
+      envKey: LOCAL_PROTOCOL
+      labelEn: Protocol
+      labelZh: 协议
+      required: true
+      type: select
+      values:
+        - label: TCP
+          value: tcp
+        - label: HTTP
+          value: http
+        - label: HTTPS
+          value: https
+        - label: TCPMUX
+          value: tcpmux
+        - label: STCP
+          value: stcp
+    - default: ''
+      edit: true
+      envKey: REMOTE_PORT
+      labelEn: Remote Port
+      labelZh: 远程端口（留空自动生成）
+      required: false
+      type: text
+    - default: ''
+      edit: true
+      envKey: PROXY_NAME
+      labelEn: Proxy Name
+      labelZh: 远程名称（留空自动生成）
+      required: false
+      type: text
+    - default: ''
+      edit: true
+      envKey: AUTH_USER
+      labelEn: Auth User
+      labelZh: 用户名
+      required: false
+      type: text
+    - default: 'token123456'
+      edit: true
+      envKey: AUTH_TOKEN
+      labelEn: Auth Token
+      labelZh: 密钥
+      required: true
+      type: text

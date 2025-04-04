@@ -1,0 +1,14 @@
+services:
+  frpc:
+    image: finalgene/openssh:9.1
+    container_name: ${CONTAINER_NAME}
+    restart: always
+    network_mode: host
+    command: >
+      ssh -R ":80:${LOCAL_ADDRESS}:${LOCAL_PORT}" "v0@${SERVER_ADDRESS}" -p ${SERVER_PORT} ${LOCAL_PROTOCOL}
+      $([ ${REMOTE_PORT} ] && echo "--remote_port ${REMOTE_PORT}")
+      $([ ${PROXY_NAME} ] && echo "--proxy_name ${PROXY_NAME}")
+      $([ ${AUTH_USER} ] && echo "--user ${AUTH_USER}")
+      --token "${AUTH_TOKEN}"
+    labels:
+      createdBy: "Apps"
