@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 设置变量
+# 设置变量  本地仓库地址很重要！！！
 APP_PATH="/opt/1panel/resource/apps/local"
 # 拉不下来就使用代理，记得修改代理地址
 REPO_URL="https://github.com/baishicoke/1panel-app"
