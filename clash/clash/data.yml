@@ -1,0 +1,19 @@
+name: Clash
+tags:
+  - 建站
+title: 这是自建clash应用
+description: 这是自建clash应用
+additionalProperties:
+  key: clash
+  name: Clash
+  tags:
+    - tools
+  shortDescZh: clash-docker应用
+  shortDescEn: clash-docker application
+  type: tools
+  crossVersionUpdate: true
+  limit: 0
+  recommend: 0
+  website: 
+  github: 
+  document: 

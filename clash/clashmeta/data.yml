@@ -1,0 +1,19 @@
+name: ClashMeta
+tags:
+  - 工具
+title: ClashMeta应用
+description: ClashMeta应用
+additionalProperties:
+  key: clashmeta
+  name: ClashMeta
+  tags:
+    - Tool
+  shortDescZh: Docker运行ClashMeta
+  shortDescEn: The application for ClashMeta 
+  type: tool
+  crossVersionUpdate: true
+  limit: 0
+  recommend: 0
+  website: https://wiki.metacubex.one/
+  github: https://github.com/MetaCubeX/mihomo/tree/Alpha
+  document: https://github.com/MetaCubeX/metacubexd

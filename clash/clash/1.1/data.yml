@@ -1,0 +1,63 @@
+additionalProperties:  # 固定参数
+  formFields:
+    - default: dreamacro/clash-premium:latest
+      envKey: CLASH_IMAGE      # 用于 Clash 服务的镜像名称
+      labelEn: "Docker Image"
+      labelZh: "Docker 镜像"
+      required: true
+      type: text
+
+    - default: 7890
+      envKey: PANEL_APP_PORT_7890   # 宿主机映射到容器内部 7890 端口（Clash 服务）
+      labelEn: "Port for Clash (7890)"
+      labelZh: "Clash 服务 - 7890端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: 9090
+      envKey: PANEL_APP_PORT_9090   # 宿主机映射到容器内部 9090 端口（Clash 服务）
+      labelEn: "Port for Clash (9090)"
+      labelZh: "Clash 服务 - 9090端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: /path/to/your/config.yaml
+      envKey: CLASH_CONFIG_PATH   # 本机 Clash 配置文件路径，将挂载到容器内部
+      labelEn: "Clash Config Path"
+      labelZh: "Clash 配置文件路径"
+      required: true
+      type: text
+
+    - default: clash-app
+      envKey: CONTAINER_NAME      # 用于 Clash 服务的容器名称，固定写法，勿改
+      labelEn: "Container Name (Clash)"
+      labelZh: "Clash 服务 - 容器名称"
+      required: true
+      type: text
+
+    - default: 9999
+      envKey: PANEL_APP_PORT_HTTP     # 用户可配置的 YACD 服务宿主机端口
+      labelEn: "Port for YACD"
+      labelZh: "YACD 服务 - 端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: always
+      envKey: SETTING_RESTART       # Clash 服务的重启策略选择
+      labelEn: "Restart Policy for Clash"
+      labelZh: "服务 - 重启策略"
+      required: true
+      type: select
+      values:
+        - label: always
+          value: "always"
+        - label: unless-stopped
+          value: "unless-stopped"
+
+  
+
+
+

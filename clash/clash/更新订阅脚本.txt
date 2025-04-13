@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# === 变量定义区域 ===
+#   订阅链接
+BASE_URL=""
+FLAG="&flag=clash"
+URL="${BASE_URL}${FLAG}"
+
+# 配置文件相关路径
+CONFIG_DIR="/volume1/docker/clashpremium"
+CONFIG_TMP="${CONFIG_DIR}/config.file"
+CONFIG_FINAL="${CONFIG_DIR}/config.yaml"
+
+# 容器名称
+CLASH_CONTAINER="clash-premium"
+
+# === 开始处理 ===
+echo "开始下载配置文件... 从URL: $URL"
+
+# 下载配置文件
+wget -O "$CONFIG_TMP" "$URL"
+
+# 检查文件是否为空
+if [ ! -s "$CONFIG_TMP" ]; then
+  echo "错误: 下载的配置文件为空，停止脚本执行！"
+  exit 1
+else
+  echo "配置文件下载成功！"
+fi
+
+# 检查配置文件中是否包含端口 7890
+if grep -q "7890" "$CONFIG_TMP"; then
+  echo "配置文件包含 '7890'，继续处理..."
+
+  # 重命名为 config.yaml
+  mv "$CONFIG_TMP" "$CONFIG_FINAL"
+  echo "配置文件重命名为 config.yaml 完成。"
+
+  # 修改 external-controller 的地址
+  sed -i "6s/^external-controller: '127.0.0.1:9090'/external-controller: '0.0.0.0:9090'/" "$CONFIG_FINAL"
+  echo "配置文件中的 external-controller 已成功修改。"
+
+  # 重启 Clash 容器服务
+  echo "正在重启 Clash 容器（${CLASH_CONTAINER}）..."
+  docker restart "$CLASH_CONTAINER"
+
+  if [ $? -eq 0 ]; then
+    echo "Clash 容器重启成功！"
+  else
+    echo "错误: Clash 容器重启失败！"
+    exit 1
+  fi
+else
+  echo "警告: 配置文件中没有找到匹配的内容（7890），停止脚本执行！"
+  exit 1
+fi

@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  clash:
+    image: ${CLASH_IMAGE}                   # 用户在 data.yml 中填写的镜像（默认：dreamacro/clash-premium:latest）
+    container_name: ${CONTAINER_NAME}         # 固定写法，勿改
+    restart: ${SETTING_RESTART}                 # 根据用户选择的重启策略（always 或 unless-stopped）
+    networks:
+      - 1panel-network                     # 1Panel 创建的应用均在此网络下
+    volumes:
+      - ${CLASH_CONFIG_PATH}:/root/.config/clash/config.yaml  # 挂载用户填写的配置文件到容器内
+    ports:
+      - ${PANEL_APP_PORT_7890}:7890          # Clash 服务映射宿主机端口至容器内部 7890 端口
+      - ${PANEL_APP_PORT_9090}:9090          # Clash 服务映射宿主机端口至容器内部 9090 端口
+    labels:
+      createdBy: "Apps"
+
+  yacd:
+    image: haishanh/yacd                      # 官方固定 YACD 镜像
+    container_name: yacd-${CONTAINER_NAME}    # 构造 YACD 容器名称（可根据需求调整）
+    restart: ${SETTING_RESTART}                  # 根据用户选择的重启策略（always 或 unless-stopped）
+    networks:
+      - 1panel-network
+    ports:
+      - "${PANEL_APP_PORT_HTTP}:80"              # 映射用户填写的宿主机端口到容器 80 端口
+    labels:
+      createdBy: "Apps"
+
+networks:
+  1panel-network:
+    external: true

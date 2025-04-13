@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  clash:
+    image: ${CLASH_IMAGE}
+    container_name: ${CONTAINER_NAME}
+    restart: ${SETTING_RESTART}
+    networks:
+      - 1panel-network
+    volumes:
+      - ${CLASH_CONFIG_PATH}:/root/.config/clash/config.yaml
+    ports:
+      - ${PANEL_APP_PORT_7890}:7890
+      - ${PANEL_APP_PORT_9090}:9090
+    labels:
+      createdBy: "Apps"
+
+  yacd:
+    image: haishanh/yacd
+    container_name: yacd-${CONTAINER_NAME}
+    restart: ${SETTING_RESTART}
+    networks:
+      - 1panel-network
+    ports:
+      - "${PANEL_APP_PORT_HTTP}:80"
+    environment:
+      - "YACD_DEFAULT_BACKEND=http://${CLASH_HOSTNAME}:${PANEL_APP_PORT_9090}"
+    labels:
+      createdBy: "Apps"
+
+networks:
+  1panel-network:
+    external: true
