@@ -52,3 +52,4 @@ rm -rf "$TMP_DIR"
 
 # 成功提示
 echo -e "\n✅ Clash 应用已成功复制到：$APP_PATH"
+# by tomato
