@@ -1,13 +1,13 @@
 name: Clash
 tags:
-  - 建站
-title: 这是自建clash应用
-description: 这是自建clash应用
+  - Tool
+title: 这是clash代理应用
+description: 这是clash代理应用
 additionalProperties:
   key: clash
   name: Clash
   tags:
-    - tools
+    - Tool
   shortDescZh: clash-docker应用
   shortDescEn: clash-docker application
   type: tools
