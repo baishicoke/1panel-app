@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === 用户配置项 ===
-USE_PROXY=true   # 是否启用代理（true/false）
+USE_PROXY=false   # 是否启用代理（true/false）
 PROXY_URL="http://192.168.1.12:7777"
 
 # === 获取 1Panel 安装路径 ===
