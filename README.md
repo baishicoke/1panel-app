@@ -1,6 +1,4 @@
-[TOC]
-
-
+[toc]
 
 ---
 
@@ -164,11 +162,73 @@ echo -e "\n✅ 应用已成功复制到：$APP_PATH"
 
 然后应用商店刷新本地应用即可。
 
-## 3. 备注
+## 3.自动更新订阅方法
 
-**本分支主要目的是维护clash代理软件**
+**本分支主要目的是维护clash代理软件
+提供自动更新订阅脚本，将该脚本放到1panel的计划任务设置每天执行达到自动更新目的**
 
+注意！
+更改自动更新脚本变量：
 
+| 参数含义                                                                                      | 参数            |
+| --------------------------------------------------------------------------------------------- | --------------- |
+| 订阅地址                                                                                      | BASE_URL        |
+| 请求类型一般默认不需要改                                                                      | FLAG            |
+| 容器名称                                                                                      | CLASH_CONTAINER |
+| 配置文件config.yaml路径<br />写到上一级文件夹即可<br />比如"./data/config.yaml"就写到"./data" | CONFIG_DIR      |
 
+```shell
 
+#!/bin/bash
 
+# === 变量定义区域 ===
+BASE_URL=""
+FLAG="&flag=clash"
+URL="${BASE_URL}${FLAG}"
+
+CONFIG_DIR="/volume1/docker/clashpremium"
+CONFIG_TMP="${CONFIG_DIR}/config.file"
+CONFIG_FINAL="${CONFIG_DIR}/config.yaml"
+
+CLASH_CONTAINER="clash-premium"
+
+echo "开始下载配置文件... 从URL: $URL"
+
+wget -O "$CONFIG_TMP" "$URL"
+
+if [ ! -s "$CONFIG_TMP" ]; then
+  echo "错误: 下载的配置文件为空，停止脚本执行！"
+  exit 1
+else
+  echo "配置文件下载成功！"
+fi
+
+if grep -q "7890" "$CONFIG_TMP"; then
+  echo "配置文件包含 '7890'，继续处理..."
+
+  mv "$CONFIG_TMP" "$CONFIG_FINAL"
+  echo "配置文件重命名为 config.yaml 完成。"
+
+  # === 兼容有无引号的 external-controller 替换 ===
+  sed -i "s/^[[:space:]]*external-controller:[[:space:]]*['\"]\{0,1\}.*:9090['\"]\{0,1\}/external-controller: 0.0.0.0:9090/" "$CONFIG_FINAL"
+  echo "配置文件中的 external-controller 已成功修改为 0.0.0.0:9090。"
+
+  echo "正在重启 Clash 容器（${CLASH_CONTAINER}）..."
+  docker restart "$CLASH_CONTAINER"
+
+  if [ $? -eq 0 ]; then
+    echo "Clash 容器重启成功！"
+  else
+    echo "错误: Clash 容器重启失败！"
+    exit 1
+  fi
+else
+  echo "警告: 配置文件中没有找到匹配的内容（7890），停止脚本执行！"
+  exit 1
+fi
+
+```
+
+## 备注
+
+安装应用准备好config.yaml配置文件，不然启动失败
