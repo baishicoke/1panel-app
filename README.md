@@ -1,34 +1,6 @@
- 中文 | [English](https://github.com/okxlin/appstore/blob/localApps/README-en.md)
+[TOC]
 
----
 
-## 打赏链接
-
-[**点我打赏，用爱发电**](https://afdian.com/a/dockerapps)
-
-[![点我打赏，用爱发电](https://github.com/okxlin/appstore/raw/localApps/docs/afdian-logo.png)](https://afdian.com/a/dockerapps)
-
----
-
-## 目录
-
-- [打赏链接](#打赏链接)
-- [目录](#目录)
-- [免责声明](#免责声明)
-  - [1. 镜像容器适配](#1-镜像容器适配)
-  - [2. 法律遵守](#2-法律遵守)
-  - [3. 免责声明接受](#3-免责声明接受)
-- [1. 简介](#1-简介)
-  - [1Panel第三方应用商店应用分类合集与介绍](#1panel第三方应用商店应用分类合集与介绍)
-- [2. 使用方式](#2-使用方式)
-  - [2.1 国内网络](#21-国内网络)
-    - [2.1.1 使用 git 命令获取应用](#211-使用-git-命令获取应用)
-    - [2.1.2 使用压缩包方式获取应用](#212-使用压缩包方式获取应用)
-  - [2.2 国际互联网络](#22-国际互联网络)
-    - [2.2.1 使用 git 命令获取应用](#221-使用-git-命令获取应用)
-    - [2.2.2 使用压缩包方式获取应用](#222-使用压缩包方式获取应用)
-- [3. 备注](#3-备注)
-- [4. 应用一览图](#4-应用一览图)
 
 ---
 
@@ -54,63 +26,13 @@
 
 ## 1. 简介
 
-这是一些适配 `1Panel`商店 `2.0`版本的docker应用配置。
-
-致力于一键运行各种 Docker 应用。无需复杂配置，享受便利和高效。
-
-### 1Panel第三方应用商店应用分类合集与介绍
-
-- https://1p.131.gs
-
-**感谢作者[@包子叔](https://github.com/baozishu)**
+**本分支主要目的是维护clash代理软件**
 
 ## 2. 使用方式
 
-默认 `1Panel`安装在 `/opt/`路径下，如果不是按需修改以下。
-
-### 2.1 国内网络
-
-> GitHub加速方式
->
->> - (本仓库已添加)自建：https://github.com/hunshcn/gh-proxy
->> - https://ghp.ci
->>
+### 2.1 国际互联网络
 
 #### 2.1.1 使用 git 命令获取应用
-
-`1Panel`计划任务类型 `Shell 脚本`的计划任务框里，添加并执行以下命令，或者终端运行以下命令，
-
-```shell
-git clone -b localApps https://ghp.ci/https://github.com/okxlin/appstore /opt/1panel/resource/apps/local/appstore-localApps
-
-cp -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/
-
-rm -rf /opt/1panel/resource/apps/local/appstore-localApps
-```
-
-然后应用商店刷新本地应用即可。
-
-#### 2.1.2 使用压缩包方式获取应用
-
-`1Panel`计划任务类型 `Shell 脚本`的计划任务框里，添加并执行以下命令，或者终端运行以下命令，
-
-```shell
-wget -P /opt/1panel/resource/apps/local https://ghp.ci/https://github.com/okxlin/appstore/archive/refs/heads/localApps.zip
-
-unzip -o -d /opt/1panel/resource/apps/local/ /opt/1panel/resource/apps/local/localApps.zip
-
-cp -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/
-
-rm -rf /opt/1panel/resource/apps/local/appstore-localApps
-
-rm -rf /opt/1panel/resource/apps/local/localApps.zip
-```
-
-然后应用商店刷新本地应用即可。
-
-### 2.2 国际互联网络
-
-#### 2.2.1 使用 git 命令获取应用
 
 `1Panel`计划任务类型 `Shell 脚本`的计划任务框里，添加并执行以下命令，或者终端运行以下命令，
 
@@ -174,90 +96,79 @@ echo -e "\n✅ Clash 应用已成功复制到：$APP_PATH"
 
 然后应用商店刷新本地应用即可。
 
-
-```
-git clone -b demo https://github.com/baishicoke/1panel-app /opt/1panel/resource/apps/local/appstore-localApps
-
-cp -rf /opt/1panel/resource/apps/local/appstore-localApps/clash/* /opt/1panel/resource/apps/local/
-
-rm -rf /opt/1panel/resource/apps/local/appstore-localApps
-```
-
-#### 2.2.2 使用压缩包方式获取应用
+#### 2.1.2 使用压缩包方式获取应用
 
 `1Panel`计划任务类型 `Shell 脚本`的计划任务框里，添加并执行以下命令，或者终端运行以下命令，
 
 ```shell
-wget -P /opt/1panel/resource/apps/local https://github.com/okxlin/appstore/archive/refs/heads/localApps.zip
+#!/bin/bash
 
-unzip -o -d /opt/1panel/resource/apps/local/ /opt/1panel/resource/apps/local/localApps.zip
+# === 用户配置项 ===
+USE_PROXY=false   # 是否启用代理（true/false）
+PROXY_URL="http://192.168.1.12:7777"
 
-cp -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/
+# === 获取 1Panel 安装路径 ===
+BASE_DIR=$(which 1pctl | xargs grep '^BASE_DIR=' | cut -d'=' -f2)
 
-rm -rf /opt/1panel/resource/apps/local/appstore-localApps
+# 检查 BASE_DIR 是否有效
+if [[ -z "$BASE_DIR" || ! -d "$BASE_DIR" ]]; then
+  echo "❌ 无法获取 1Panel 安装路径，退出。"
+  exit 1
+fi
 
-rm -rf /opt/1panel/resource/apps/local/localApps.zip
+# 设置路径和仓库
+APP_PATH="$BASE_DIR/1panel/resource/apps/local"
+ZIP_URL="https://github.com/baishicoke/1panel-app/archive/refs/heads/demo.zip"
+ZIP_FILE="$APP_PATH/localApps.zip"
+UNZIP_DIR="$APP_PATH/1panel-app-demo"
+
+# 设置代理（如果启用）
+if [[ "$USE_PROXY" == true ]]; then
+  export http_proxy="$PROXY_URL"
+  export https_proxy="$PROXY_URL"
+  echo "🌐 已启用代理：$PROXY_URL"
+else
+  echo "🚫 未启用代理。"
+fi
+
+# 下载 zip 包
+echo "📦 正在下载压缩包..."
+wget -O "$ZIP_FILE" "$ZIP_URL"
+if [ $? -ne 0 ]; then
+  echo "❌ 下载失败，请检查网络、代理或链接是否正确。"
+  [[ "$USE_PROXY" == true ]] && unset http_proxy https_proxy
+  exit 2
+fi
+
+# 解压并覆盖原有内容
+echo "📂 正在解压..."
+unzip -o -d "$APP_PATH" "$ZIP_FILE"
+
+# 拷贝 apps 目录下的内容
+echo "📁 正在复制应用..."
+cp -rf "$UNZIP_DIR/clash/"* "$APP_PATH/"
+
+# 清理
+echo "🧹 正在清理临时文件..."
+rm -rf "$UNZIP_DIR"
+rm -f "$ZIP_FILE"
+
+# 清除代理变量
+[[ "$USE_PROXY" == true ]] && unset http_proxy https_proxy
+
+# 成功提示
+echo -e "\n✅ 应用已成功复制到：$APP_PATH"
+# by tomato
+
 ```
 
 然后应用商店刷新本地应用即可。
 
-```bash
-#!/bin/bash
-
-# 设置变量
-APP_PATH="/opt/1panel/resource/apps/local"
-REPO_URL="https://github.com/baishicoke/1panel-app"
-PROXY_URL="http://192.168.1.12:7777"
-
-# 可选：为 git 等命令临时设置代理
-export http_proxy=$PROXY_URL
-export https_proxy=$PROXY_URL
-
-# 克隆 demo 分支
-git clone -b demo "$REPO_URL" "$APP_PATH/appstore-localApps"
-
-# 拷贝 clash 应用
-cp -rf "$APP_PATH/appstore-localApps/clash/"* "$APP_PATH/"
-
-# 删除克隆的临时 appstore-localApps 目录
-rm -rf "$APP_PATH/appstore-localApps"
-
-# 取消代理（如果不想后续命令再使用）
-unset http_proxy
-unset https_proxy
-
-echo "Clash 应用复制完成，代理已使用 $PROXY_URL"
-
-```
-
 ## 3. 备注
 
-**未显示在本地应用列表里的，表示未完全适配应用商店面板操作**
+**本分支主要目的是维护clash代理软件**
 
-**但是支持直接终端运行。**
 
-> 本仓库应用基本支持直接 `docker-compose up` 运行
 
-以 `rustdesk`为例
 
-```shell
-# 进入 rustdesk 的最新版本目录
-cd /opt/1panel/resource/apps/local/rustdesk/versions/latest/
 
-# 复制 .env.sample 为 .env
-cp .env.sample .env
-
-# 编辑 .env 文件，修改参数
-nano .env
-
-# 启动 RustDesk
-docker-compose up -d
-
-# 查看连接所需密钥
-cat ./data/hbbs/id_ed25519.pub
-
-```
-
-## 4. 应用一览图
-
-![](https://github.com/okxlin/appstore/raw/localApps/docs/app-list.png)
