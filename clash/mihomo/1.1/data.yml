@@ -1,18 +1,18 @@
 additionalProperties:
   formFields:
-    - default: metacubex/mihomo
+    - default: metacubex/mihomo:Alpha
       edit: true
-      envKey: CLASH_IMAGE
+      envKey: MIHOMO_IMAGE
       labelEn: "Docker Image"
       labelZh: "Docker 镜像"
-      required: false
+      required: true
       type: text
 
     - default: 7890
       edit: true
       envKey: PANEL_APP_PORT_7890
-      labelEn: "Port for ClashMeta (7890)"
-      labelZh: "ClashMeta 服务 - 7890端口"
+      labelEn: "Port for mihomo  (7890)"
+      labelZh: "mihomo 服务 - 7890端口"
       required: true
       rule: paramPort
       type: number
@@ -20,31 +20,31 @@ additionalProperties:
     - default: 9090
       edit: true
       envKey: PANEL_APP_PORT_9090
-      labelEn: "Port for ClashMta (9090)"
-      labelZh: "ClashMeta 服务 - 9090端口"
+      labelEn: "Port for mihomo  (9090)"
+      labelZh: "mihomo服务 - 9090端口"
       required: true
       rule: paramPort
       type: number
 
     - default: ./data/
       edit: true
-      envKey: CLASH_CONFIG_PATH
-      labelEn: "ClashMeta Config Path"
-      labelZh: "ClashMeta 配置文件路径"
+      envKey: MIHOMO_CONFIG_PATH
+      labelEn: "mihomo Config Path"
+      labelZh: "mihomo 配置文件路径"
       required: true
       type: text
 
     # - default: ./data/ui
-    #   edit: true
-    #   envKey: CLASH_UI_PATH
-    #   labelEn: "ClashMeta Config ui Path"
-    #   labelZh: "ClashMeta 配置ui路径"
+    #   edit: false
+    #   envKey: MIHOMO_UI_PATH
+    #   labelEn: "mihomo Config ui Path"
+    #   labelZh: "mihomo 配置ui路径"
     #   required: true
     #   type: text      
 
     - default: ghcr.io/metacubex/metacubexd
       edit: true
-      envKey: CLASH_UI_SELECT
+      envKey: MIHOMO_UI_SELECT
       labelEn: "YACD UI SELECT"
       labelZh: "UI面板选择 "
       required: true
@@ -70,7 +70,7 @@ additionalProperties:
 
     # - default: 192.168.50.211
     #   edit: true
-    #   envKey: CLASH_HOSTNAME
+    #   envKey: MIHOMO_HOSTNAME
     #   labelEn: "Clash Backend Host"
     #   labelZh: "Clash 后端地址"
     #   required: true

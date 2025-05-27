@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   clash:
-    image: ${CLASH_IMAGE}
+    image: ${MIHOMO_IMAGE}
     container_name: ${CONTAINER_NAME}
     restart: ${SETTING_RESTART}
     networks:
       - 1panel-network
     volumes:
-      - ${CLASH_CONFIG_PATH}:/root/.config/mihomo/
-      # - ${CLASH_UI_PATH}:/etc/mihomo/ui
+      - ${MIHOMO_CONFIG_PATH}:/root/.config/mihomo/
+      # - ${MIHOMO_UI_PATH}:/etc/mihomo/ui
       - /dev/net/tun:/dev/net/tun
     ports:
       - ${PANEL_APP_PORT_7890}:7890
@@ -18,7 +18,7 @@ services:
       createdBy: "Apps"
 
   UI:
-    image: ${CLASH_UI_SELECT}
+    image: ${MIHOMO_UI_SELECT}
     container_name: UI-${CONTAINER_NAME}
     restart: ${SETTING_RESTART}
     networks:
