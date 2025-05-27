@@ -1,0 +1,19 @@
+name: mihomo
+tags:
+  - 工具
+title: mihomo应用
+description: mihomo应用
+additionalProperties:
+  key: mihomo
+  name: mihomo
+  tags:
+    - Tool
+  shortDescZh: Docker运行mihomo
+  shortDescEn: The application for mihomo
+  type: tool
+  crossVersionUpdate: true
+  limit: 0
+  recommend: 0
+  website: https://wiki.metacubex.one/
+  github: https://github.com/MetaCubeX/mihomo/tree/Alpha
+  document: https://github.com/MetaCubeX/metacubexd

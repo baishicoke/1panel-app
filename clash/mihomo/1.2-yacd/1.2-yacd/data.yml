@@ -1,0 +1,121 @@
+additionalProperties:
+  formFields:
+    - default: metacubex/mihomo:Alpha
+      edit: true
+      envKey: MIHOMO_IMAGE
+      labelEn: "Docker Image"
+      labelZh: "Docker 镜像"
+      required: true
+      type: text
+
+    - default: 7890
+      edit: true
+      envKey: PANEL_APP_PORT_7890
+      labelEn: "Port for mihomo  (7890)"
+      labelZh: "mihomo 服务 - 7890端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: 9090
+      edit: true
+      envKey: PANEL_APP_PORT_9090
+      labelEn: "Port for mihomo  (9090)"
+      labelZh: "mihomo服务 - 9090端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: ./data/
+      edit: true
+      envKey: MIHOMO_CONFIG_PATH
+      labelEn: "mihomo Config Path"
+      labelZh: "mihomo 配置文件路径"
+      required: true
+      type: text
+
+    - default: ./data/ui
+      edit: false
+      envKey: MIHOMO_UI_PATH
+      labelEn: "mihomo Config ui Path"
+      labelZh: "mihomo 配置ui路径"
+      required: true
+      type: text      
+
+    - default: ghcr.io/metacubex/metacubexd
+      edit: true
+      envKey: MIHOMO_UI_SELECT
+      labelEn: "YACD UI SELECT"
+      labelZh: "UI面板选择 "
+      required: true
+      type: select
+      values:
+        - label: Yacd
+          value: haishanh/yacd
+        - label: Yacd-Meta
+          value: asnil/yacd-meta
+        - label: metacubexd-ui
+          value: mrxianyu/metacubexd-ui
+        - label: metacubex/metacubexd
+          value: ghcr.io/metacubex/metacubexd
+
+    - default: 9999
+      edit: true
+      envKey: PANEL_APP_PORT_HTTP
+      labelEn: "Port for YACD"
+      labelZh: "UI面板服务 - 端口"
+      required: true
+      rule: paramPort
+      type: number
+
+    - default: 192.168.50.211
+      edit: true
+      envKey: MIHOMO_HOSTNAME
+      labelEn: "Clash Backend Host"
+      labelZh: "Clash 后端地址"
+      required: true
+      type: text
+
+    - default: always
+      edit: true
+      envKey: SETTING_RESTART
+      labelEn: "Restart Policy for Clash"
+      labelZh: "服务 - 重启策略"
+      required: true
+      type: select
+      values:
+        - label: always
+          value: "always"
+        - label: unless-stopped
+          value: "unless-stopped"
+
+    # - default: ""
+    #   edit: true
+    #   envKey: CLASH_SECRET
+    #   labelEn: "Clash API Secret"
+    #   labelZh: "Clash 接口密钥"
+    #   required: false
+    #   type: text
+
+    # - default: auto
+    #   edit: true
+    #   envKey: CLASH_THEME
+    #   labelEn: "YACD UI Theme"
+    #   labelZh: "YACD UI 主题"
+    #   required: false
+    #   type: select
+    #   values:
+    #     - label: auto
+    #       value: auto
+    #     - label: dark
+    #       value: dark
+    #     - label: light
+    #       value: light
+
+    # - default: clash-app
+    #   edit: true
+    #   envKey: CONTAINER_NAME
+    #   labelEn: "Container Name (Clash)"
+    #   labelZh: "Clash 服务 - 容器名称"
+    #   required: true
+    #   type: text

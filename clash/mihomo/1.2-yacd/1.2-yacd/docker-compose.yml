@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  clash:
+    image: ${MIHOMO_IMAGE}
+    container_name: ${CONTAINER_NAME}
+    restart: ${SETTING_RESTART}
+    networks:
+      - 1panel-network
+    volumes:
+      - ${MIHOMO_CONFIG_PATH}:/root/.config/mihomo/
+      # - ${MIHOMO_UI_PATH}:/etc/mihomo/ui
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - ${PANEL_APP_PORT_7890}:7890
+      - ${PANEL_APP_PORT_9090}:9090
+    labels:
+      createdBy: "Apps"
+
+  UI:
+    image: ${MIHOMO_UI_SELECT}
+    container_name: UI-${CONTAINER_NAME}
+    restart: ${SETTING_RESTART}
+    networks:
+      - 1panel-network
+    ports:
+      - "${PANEL_APP_PORT_HTTP}:80"
+      # - "2019:2019"
+    # environment:
+    #   - "YACD_DEFAULT_BACKEND=http://${CLASH_HOSTNAME}:${PANEL_APP_PORT_9090}"
+    labels:
+      createdBy: "Apps"
+
+networks:
+  1panel-network:
+    external: true
