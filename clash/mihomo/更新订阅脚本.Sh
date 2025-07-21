@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === 可配置变量区域 ===
-BASE_URL="https://s.jusesub.com/jsysub/06417fda9305ca8458a79cadba8348e6"
+BASE_URL="https://s.jb/06417fda9305ca8458a79cadba8348e6"
 FLAG="&flag=meta"
 URL="${BASE_URL}${FLAG}"
 
